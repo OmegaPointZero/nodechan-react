@@ -332,3 +332,55 @@ img.banner{
 .column h3{
     margin-top: 0px;
 }
+
+.catalogContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.catalogPreviewContainer{
+    width: 180px !important;
+    display: block !important;
+}
+
+.catalogMessage{
+    margin: auto;
+    text-align: center !important;
+}
+
+.catalogThumb{
+    max-width: 100%
+}
+
+.thumbnail{
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
+.catContents{
+    text-align: center;
+    max-width: 165px;
+}
+
+
+.file{
+    display: block;
+}
+
+.hidden{
+    display: none;
+}
+
+.report{
+    color: #000080;
+    text-decoration: none;
+}
+
+.report-button{
+    margin: 0;
+    padding:5px;
+}
+

@@ -28,7 +28,6 @@ class BoardMenu extends Component {
     }
 
     componentDidMount(){
-        console.log("Component did mount, calling fetch...")
         request.get('http://127.0.0.1:8080/api/boardList')
         .end((err,response)=>{
             var res = response.body

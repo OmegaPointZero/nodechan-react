@@ -13,9 +13,12 @@ class Board extends Component {
     componentDidMount(){
 
         const makePost = function(post){
+
+            var fname = post.preview[0].fileName;
+            var fn = fname.split('.')[0] + '.png'
             
             var p = '<div class="catalogPreviewContainer"><div class="catalogContainer" id="p'+post.OP+'">'
-            p += '<div class="file"><div class="FileInfo"></div><div class="thumbnail"><a href="/'+post.preview[0].board+'/thread/'+post.OP+'"><img src="http://127.0.0.1:8080/s'+post.preview[0].fileName+'" alt="'+post.preview[0].fileSize+'" class="catalogThumb"></a></div></div>'
+            p += '<div class="file"><div class="FileInfo"></div><div class="thumbnail"><a href="/'+post.preview[0].board+'/thread/'+post.OP+'"><img src="http://127.0.0.1:8080/images/s'+fn+'" alt="'+post.preview[0].fileSize+'" class="catalogThumb"></a></div></div>'
             p += '<div class="catalogMessage"><div class="catContents"><div style="font-size:11px;">R: <b>'+(post.posts-1)+'</b> I: <b>'+(post.images-1)+'</div>'+post.preview[0].body+'</div><br></div></div></div></div>'
             return p
         }
@@ -41,7 +44,7 @@ class Board extends Component {
         return(
             <div>
                 <BoardMenu />
-                <div className="posts">{ReactHtmlParser(this.state.posts)}</div>
+                <div className="catalogContainer">{ReactHtmlParser(this.state.posts)}</div>
                 <BoardMenu />
                 <Footer />
             </div>
