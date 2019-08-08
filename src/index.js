@@ -12,6 +12,7 @@ ReactDOM.render((
         <div>
             <Route exact path = "/" component = {App} />
             <Route path = "/boards/:board" component = {Board} />
+             
         </div>
     </Router>
 

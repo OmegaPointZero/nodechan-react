@@ -9,7 +9,6 @@ const makeTable = (function(array,category){
     var tableElements = []
     tableElements.push('<table class="column"><tbody><tr><td><h3>'+category+'</h3></td></tr>')
 
-    //Get all fkn boards per category
     var filteredCategories = array.filter(function(board){
         return board.category === category
     })
@@ -25,9 +24,9 @@ const makeTable = (function(array,category){
 //Generate the bulletin board
 const makeBulletinBoard = (function(array){
     var thisArr = []
+    console.log(array)
+    console.log(array.map(board=>board.category))
     let unique = [...new Set(array.map(board=>board.category))]
-    console.log('Unique:')
-    console.log(unique)
     unique.forEach(function(category){
         thisArr.push(makeTable(array,category))
     })    
@@ -43,10 +42,10 @@ class BulletinBoard extends Component {
     }
 
     componentDidMount(){
-        console.log("Component did mount, calling fetch...")
-        request.get('http://127.0.0.1:8080/api/boardList')
+        request.get('http://127.0.0.1:8080/api/boardlist')
         .end((err,response)=>{
-            var res = response.body
+            var res = response.body;
+            console.log(res)
             this.setState({boards:makeBulletinBoard(res)})
         })
     };
