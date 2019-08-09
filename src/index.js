@@ -14,7 +14,6 @@ ReactDOM.render((
             <Route exact path = "/" component = {App} />
             <Route path = "/boards/:board" component = {Board} />
             <Route path = "/:board/thread/:thread" component = {Thread} /> 
-            /* Add route for report page, one for 404 */
         </div>
     </Router>
 
