@@ -1,13 +1,13 @@
 {
   "name": "reactchan",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-html-parser": "^2.0.2",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^1.1.4",
+    "react-scripts": "^3.0.1",
     "superagent": "^3.8.3"
   },
   "scripts": {
