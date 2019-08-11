@@ -38,9 +38,6 @@ class BoardMenu extends Component {
 
     render(){
 
-        if(!this.state.boards){
-            return (<div>LOADING</div>)
-        }
         return(
             <div className="boardNav"> {ReactHtmlParser(this.state.boards)} </div>
         );
