@@ -45,7 +45,6 @@ class Board extends Component {
             <div>
                 <BoardMenu />
                 <div className="topBanner">
-                    <hr className="abovePostForm" />
                     <Banner />
                 </div>
                 <hr />
