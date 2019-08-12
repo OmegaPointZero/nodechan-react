@@ -4,7 +4,7 @@ class DeleteForm extends Component {
 
     render(){
         return (
-            <span class="deleteForm">
+            <span className="deleteForm">
                 <input type="hidden" name="mode" value="userDelete" />
                     Delete Post: [<input type="checkbox" name="deleteImageOnly" className="deleteImageOnly" value="true" /> File Only ]
                 <input type="submit" id="delete" value="Delete" />

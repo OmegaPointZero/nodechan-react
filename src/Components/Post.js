@@ -110,6 +110,15 @@ class Post extends Component {
             postBody = ""
         }
 
+        var reply = function(bv, meta){
+            if(bv===false){
+                return null;
+            } else {
+                var url = "/"+meta.board+"/thread/"+meta.OP;
+                return (<span> [<a href={url} className="reply-link">Reply</a>] </span>)
+            }
+        }
+
         return(
             <div className="postContainer" id={post.postID}>
                 {memeArrows(post)}
@@ -141,6 +150,7 @@ class Post extends Component {
                                     {post.postID}&nbsp;
                                 </a>
                                 <span>
+                                    {reply(this.props.boardViewOP, this.props.meta)}
                                     <a href="#" className="report" id={rpID}>
                                                          ▶ 
                                     </a>

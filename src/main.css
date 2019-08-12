@@ -385,3 +385,8 @@ img.banner{
     padding:5px;
 }
 
+.bottomCtrl{
+    float: right;
+    padding-right: 7px;
+}
+

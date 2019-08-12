@@ -24,7 +24,7 @@ class Board extends Component {
     renderPosts = (posts) => {
         var p = []
         posts.forEach(function(post){
-            p.push(<Post post={post} />)
+            p.push(<Post post={post} boardViewOP={false} meta={null}/>)
         })
         return p
     }
@@ -129,11 +129,13 @@ class Board extends Component {
                     <hr />
                     {threadNav("bottom",this.state)}
                     <hr />
-                    <span className="deleteForm">
-                        <input type="hidden" name="mode" value="userDelete" />
-                            Delete Post: [<input type="checkbox" name="deleteImageOnly" className="deleteImageOnly" value="true" /> File Only ]
-                        <input type="submit" id="delete" value="Delete" />
-                    </span>
+                    <div className="bottomCtrl">
+                        <span className="deleteForm">
+                            <input type="hidden" name="mode" value="userDelete" />
+                                Delete Post: [<input type="checkbox" name="deleteImageOnly" className="deleteImageOnly" value="true" /> File Only ]
+                            <input type="submit" id="delete" value="Delete" />
+                        </span>
+                    </div>
                     <BoardMenu boards={this.state.boards} />
                     <Footer />
                 </div>
