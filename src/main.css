@@ -176,6 +176,7 @@ a.quotePostNumber:hover{
 
 .metadata{
     text-align: right;
+    float: right;
     padding: 3px;
 }
 

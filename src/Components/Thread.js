@@ -65,7 +65,7 @@ class Board extends Component {
             var res = response.body
             var images = this.countImages(res);
             var posters = this.getUnique(res,'userID');
-            this.setState({posts:res, replies: res.length, images: images, posters:posters})
+            this.setState({replies: res.length, images: images, posters:posters, posts:res})
         })
     };
 
@@ -76,11 +76,39 @@ class Board extends Component {
             var returnButtonTarget = "/boards/"+this.state.board+"/";
             var catalogButtonTarget = "/catalog/"+this.state.board;
             var refreshButtonTarget = "/"+this.state.board+"/thread/"+this.state.thread;
-            var threadNav = function(position){
+
+            var threadNav = function(position,state){
                 if(position==="top"){
-                    return(<div className="threadNav">[<a href={returnButtonTarget}>Return</a>] [<a href={catalogButtonTarget}>Catalog</a>] [<a href="#footer">Bottom</a>] [<a href={refreshButtonTarget}>Update</a>]</div>)
+                    return(
+                    <div className="overboard" id="top">
+                        &nbsp;
+                        <div className="threadNav">
+                            [<a href={returnButtonTarget}>Return</a>] 
+                            [<a href={catalogButtonTarget}>Catalog</a>]
+                            [<a href="#footer">Bottom</a>] 
+                            [<a href={refreshButtonTarget}>Refresh</a>]
+                        </div>
+                        <div className="metadata"> 
+                            / <span className="threadMetaData" id="replies" title="Replies">{state.replies}</span> / <span className="threadMetaData" id="images" title="Images">{state.images}</span> / <span className="threadMetaData" id="posters" title="Posters">{state.posters}</span> / 
+                        </div>
+                    </div>
+                    )
                 } else {
-                    return(<div className="threadNav">[<a href={returnButtonTarget}>Return</a>] [<a href="#footer">Top</a>] [<a      href={refreshButtonTarget}>Refresh</a>]</div>)
+                    return(
+                    <div className="overboard" id="bottom">
+                        &nbsp;
+                        <div className="threadNav">
+                            [<a href={returnButtonTarget}>Return</a>] 
+                            [<a href={catalogButtonTarget}>Catalog</a>]
+                            [<a href="#Top">Top</a>] 
+                            [<a href={refreshButtonTarget}>Refresh</a>]
+                        </div>
+                        <div className="metadata"> 
+                            / <span className="threadMetaData" id="replies" title="Replies">{state.replies}</span> / <span className="threadMetaData" id="images" title="Images">{state.images}</span> / <span className="threadMetaData" id="posters" title="Posters">{state.posters}</span> / 
+                        </div>
+                    </div>
+
+                    )
                 }
             }
 
@@ -95,14 +123,17 @@ class Board extends Component {
                     <hr className="abovePostForm" />
                     <PostForm type="newPost" />
                     <hr />
-                    <div className="overboard" id="top">
-                        &nbsp;{threadNav("top")}
-                        <div className="metadata"> 
-                            / <span className="threadMetaData" id="replies" title="Replies">{this.state.replies}</span> / <span className="threadMetaData" id="images" title="Images">{this.state.images}</span> / <span className="threadMetaData" id="posters" title="Posters">{this.state.posters}</span> / 
-                        </div>
-                    </div>
+                    {threadNav("top",this.state)}
                     <hr />
-                    {this.renderPosts(this.state.posts)}
+                    {this.renderPosts(this.state.posts)}        
+                    <hr />
+                    {threadNav("bottom",this.state)}
+                    <hr />
+                    <span className="deleteForm">
+                        <input type="hidden" name="mode" value="userDelete" />
+                            Delete Post: [<input type="checkbox" name="deleteImageOnly" className="deleteImageOnly" value="true" /> File Only ]
+                        <input type="submit" id="delete" value="Delete" />
+                    </span>
                     <BoardMenu boards={this.state.boards} />
                     <Footer />
                 </div>
