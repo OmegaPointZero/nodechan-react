@@ -85,11 +85,11 @@ class Post extends Component {
                     var size = post.fileSize + " Bytes"
                     return(
                         <div className="file">
-                            <div className="FileInfo"> File: <a href={link} target="_blank" className="fileLink">{post.fileOriginalName}</a>
+                            <div className="FileInfo"> File: <a href={link} target="_blank" rel="noopener noreferrer" className="fileLink">{post.fileOriginalName}</a>
                             {createFileSize(post.fileSize)} {post.fileDimensions})
                             </div>
                             <div className="thumbnail">
-                                <a href={link} target="_blank"><img src={src} alt={size} /></a>
+                                <a href={link} target="_blank" rel="noopener noreferrer"><img src={src} alt={size} /></a>
                             </div>
                         </div>)
                 } else {
@@ -155,7 +155,7 @@ class Post extends Component {
                                                          ▶ 
                                     </a>
                                     <div className="reply report-button hidden" id={mrpID} syle={{width: '5%', height: '2%', fontSize: '8px', position:'relative'}}>
-                                        <a className="report-link" id={reportLink} target="_blank" href={reportURL}>
+                                        <a className="report-link" id={reportLink} target="_blank"  rel="noopener noreferrer" href={reportURL}>
                                             Report
                                         </a>
                                    </div>
