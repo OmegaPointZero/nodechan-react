@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
-import Footer from './Footer';
-import BoardMenu from './BoardMenu';
-import Banner from './Banner';
 import ReactHtmlParser from 'react-html-parser';
-const request = require('superagent');
-const postgen = require('../tools/postmaker.js');
 
 class Post extends Component {
     constructor(props){
         super(props);
-        this.state = {isOP: null, post: this.props.post}
     }
 
     render(){
 
         var post = this.props.post;
-        this.state.isOP = (post.postID === post.OP)
-        var name = post.name;
+        var name;
         if(post.name ===''){
             name = 'Anonymous';
         }
@@ -68,19 +61,108 @@ class Post extends Component {
                 m += lArr.join(' ')
                 m +="</span><br/>"
             }) 
-            return m
+            return ReactHtmlParser(m)
         }
 
-        const prevImage = function(image){
-            var i = image.split('.');
-            return 's'+i[0]+'.png'
+        const memeArrows = function(post){
+            if(post.OP !== post.postID){
+               return ( <div className="memeArrows">&gt;&gt;</div> )
+            } else {
+                return(<div></div>)
+            }
         }
 
+        var opH;
+        if(post.OP===post.postID){
+            opH = "post OP"
+        } else {
+            opH = "post reply"
+        }
 
+        const imageSection = function(){
+            if(post.fileName){
+                if(post.fileName){
+                    var fn = post.fileName.split('.')[0]
+                    var link = "http://127.0.0.1:8080/images/"+post.fileName
+                    var src = "http://127.0.0.1:8080/images/s"+fn+".png"
+                    var size = post.fileSize + " Bytes"
+                    return(
+                        <div className="file">
+                            <div className="FileInfo"> File: <a href={link} target="_blank" className="fileLink">{post.fileOriginalName}</a>
+                            {createFileSize(post.fileSize)} {post.fileDimensions})
+                            </div>
+                            <div className="thumbnail">
+                                <a href={link} target="_blank"><img src={src} alt={size} /></a>
+                            </div>
+                        </div>)
+                } else {
+                    return(<div></div>) 
+                }            
+            }
+        }
+
+        var delID = "delete_"+post.postID
+        var posterUIDClass = "posteruid id_"+post.postID;
+        var pID = "#"+post.postID;
+        var rpID = "rp-"+post.postID
+        var mrpID = "m"+rpID
+        var reportLink = "report-link-"+post.postID
+        var reportURL = "/report/"+post.board+"/"+post.postID
+        var postBody = postMessage(post.body)
+        if(postBody === undefined){
+            postBody = ""
+        }
+
+        console.log(`post: ${JSON.stringify(post)}`)
 
         return(
-            <div className="postContainer" id="{post.postID}">
-            <span>{this.state.post.body}</span>
+            <div className="postContainer" id={post.postID}>
+                {memeArrows(post)}
+                <div id={post.postID} className={opH}>
+                    <div className="postInfo">
+                        <input type="checkbox" name="" id={delID} className="postDeleteBox" value="delete" />
+                        <span className="subject">
+                            {post.subject}
+                        </span>
+                        <span className="nameBlock">
+                            <span className="name">
+                                {name}
+                            </span>
+                            <span className={posterUIDClass}>
+                                (ID: <span className="hand" title="Highlight posts by this ID" style={{backgroundColor: post.userIDColor}}>
+                                    <a className="userID"> 
+                                        {post.userID} 
+                                    </a>
+                                     </span>)
+                            </span>
+                            <span className="postTime">
+                                {generateTime(post.time)}
+                            </span>
+                            <span className="postNumber">
+                                <a href={pID} className="highlightThisPost" id={post.postID}>
+                                    No. 
+                                </a>
+                                <a href="#" className="quotePostNumber" id={post.postID}>
+                                    {post.postID}&nbsp;
+                                </a>
+                                <span>
+                                    <a href="#" className="report" id={rpID}>
+                                                         ▶ 
+                                    </a>
+                                    <div className="reply report-button hidden" id={mrpID} syle={{width: '5%', height: '2%', fontSize: '8px', position:'relative'}}>
+                                        <a className="report-link" id={reportLink} target="_blank" href={reportURL}>
+                                            Report
+                                        </a>
+                                   </div>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                    {imageSection()}
+                    <div className="postMessage">
+                        {postBody}
+                    </div>
+                </div>  
             </div>
         )
     } 

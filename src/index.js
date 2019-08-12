@@ -14,7 +14,7 @@ ReactDOM.render((
     <Router>
         <div>
             <Route exact path = "/" component = {App} />
-            <Route path = "/catalogs/:board/" component = {Catalog} />
+            <Route path = "/catalog/:board/" component = {Catalog} />
             <Route path = "/boards/:board/:page?" component = {Board} />
             <Route path = "/:board/thread/:thread" component = {Thread} /> 
         </div>

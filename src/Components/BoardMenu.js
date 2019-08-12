@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 
+class BoardCode extends Component {
 
-const request = require('superagent');
+    render() {
+        var href = "/boards/"+this.props.board.boardCode;
+        var title = this.props.board.boardCode + " - " + this.props.board.boardTitle
+        return(
+            <span><a href={href} title={title} className="boardCodes"> {this.props.board.boardCode} </a> /</span>
+        )                
+    }
+}
 
 const makeBoardsMenu = function(array){
     var thisArr = []
-    thisArr.push(' [ ')
     for(var i=0;i<array.length;i++){
-        var str = ' / <a href="/boards/'+ array[i].boardCode +'"  title="'+ array[i].boardCode +' - '+ array[i].boardTitle +'" class="boardCodes">' + array[i].boardCode + '</a>'
-        thisArr.push(str);
-        var lastStr = "";
-        if(i === array.length-1){
-            thisArr.push(' / ] ')
-            lastStr = thisArr.join(' '); 
-            return lastStr
-        }
+        thisArr.push(<BoardCode board={array[i]} />);
     }
+    return thisArr
 }
 
 
@@ -28,18 +28,15 @@ class BoardMenu extends Component {
     }
 
     componentDidMount(){
-        request.get('http://127.0.0.1:8080/api/boardList')
-        .end((err,response)=>{
-            var res = response.body
-            var menu = makeBoardsMenu(res)
-            this.setState({boards:menu})
-        })
+        var boards = this.props.boards;
+        var menu = makeBoardsMenu(boards)
+        this.setState({boards:menu})
     };
 
     render(){
 
         return(
-            <div className="boardNav"> {ReactHtmlParser(this.state.boards)} </div>
+            <div className="boardNav"> [ / {makeBoardsMenu(this.props.boards)} ] </div>
         );
     }
 }

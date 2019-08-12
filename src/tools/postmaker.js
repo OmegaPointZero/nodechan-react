@@ -76,8 +76,6 @@ exports.makePost = (function(post){
         html += '<div class="file"><div class="FileInfo"> File: <a href="http://127.0.0.1:8080/images/'+post.fileName+'" target="_blank" class="fileLink">'+post.fileOriginalName+'</a> ' + createFileSize(post.fileSize)+ ' '+post.fileDimensions+')</div><div class="thumbnail"><a href="http://127.0.0.1:8080/images/'+post.fileName+'" target="_blank"><img src="http://127.0.0.1:8080/images/'+prevImage(post.fileName)+'" alt="'+post.fileSize+' Bytes"></a></div></div>'
     }
     var postBody = postMessage(post.body)
-    console.log(`post.body: ${post.body}`)
-    console.log(`postBody: ${postBody}`)
     if(postBody === undefined){
         postBody = ""
     }

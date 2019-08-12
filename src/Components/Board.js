@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import Footer from './Footer';
 import BoardMenu from './BoardMenu';
 import Banner from './Banner';
-import ReactHtmlParser from 'react-html-parser';
 const request = require('superagent');
-const postgen = require('../tools/postmaker.js');
 
 class Board extends Component {
     constructor(props){
@@ -17,7 +15,7 @@ class Board extends Component {
     componentDidMount(){
         var page;
         !this.props.page ? page = this.props.page : page = 1; 
-        var apiURI = 'http://127.0.0.1:8080/api/board/'+this.board+'/'+this.page;
+        var apiURI = 'http://127.0.0.1:8080/api/board/'+this.board+'/'+page;
         request.get(apiURI)
         .end((err,response)=>{
             var res = response.body

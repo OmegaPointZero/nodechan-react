@@ -3,19 +3,22 @@ import Footer from './Footer';
 import BoardMenu from './BoardMenu';
 import Banner from './Banner';
 import Post from './Post';
-import ReactHtmlParser from 'react-html-parser';
-const postgen = require('../tools/postmaker.js');
 const request = require('superagent');
 
 class Board extends Component {
     constructor(props){
         super(props);
-        this.state = { posts: null }
+        this.state = { 
+            posts: null,
+            board: props.match.params.board,
+            thread: props.match.params.thread,  
+            boards: null,
+        }
     }
 
     renderPosts = (posts) => {
         var p = []
-        posts.map(function(post){
+        posts.forEach(function(post){
             p.push(<Post post={post} />)
         })
         return p
@@ -23,36 +26,40 @@ class Board extends Component {
 
 
     componentDidMount(){
-        var loc = window.location.pathname.split('/');
-        var apiURI = 'http://127.0.0.1:8080/api/thread/'+loc[1]+'/'+loc[3];
+
+        // Get boards data for menu and for the title
+        request.get('http://127.0.0.1:8080/api/boardList')
+        .end((err,response)=>{
+            var res = response.body
+            this.setState({boards:res})
+        })
+
+        var apiURI = 'http://127.0.0.1:8080/api/thread/'+this.state.board+'/'+this.state.thread
         request.get(apiURI)
         .end((err,response)=>{
             var res = response.body
-            var postContainer = []
-            postContainer.push('<div class="thread" id="t'+res[0].postID+'">')
-            for(var i=0;i<res.length;i++){
-                postContainer.push(postgen.makePost(res[i]))
-            }
-            postContainer.push('</div>')
-            var pc = postContainer.join('')
-            this.setState({createdPosts:pc, posts:res})
+            this.setState({posts:res})
         })
     };
 
     render(){
-
-        return(
-            <div>
-                <BoardMenu />
-                <div className="topBanner">
-                    <Banner />
+        if(!this.state.posts){
+            return <div>Loading...</div>
+        } else {
+            return(
+                <div>
+                    <BoardMenu boards={this.state.boards} />
+                    <div className="topBanner">
+                        <hr className="abovePostForm" />
+                        <Banner />
+                    </div>
+                    <hr />
+                    {this.renderPosts(this.state.posts)}
+                    <BoardMenu boards={this.state.boards} />
+                    <Footer />
                 </div>
-                <hr />
-                {this.renderPosts(this.state.posts)}
-                <BoardMenu />
-                <Footer />
-            </div>
-        )
+            )
+        }
     } 
 }
 
