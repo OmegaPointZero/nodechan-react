@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 class Post extends Component {
-    constructor(props){
-        super(props);
-    }
 
     render(){
 
@@ -112,8 +109,6 @@ class Post extends Component {
         if(postBody === undefined){
             postBody = ""
         }
-
-        console.log(`post: ${JSON.stringify(post)}`)
 
         return(
             <div className="postContainer" id={post.postID}>

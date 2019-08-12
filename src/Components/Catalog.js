@@ -25,7 +25,7 @@ class Catalog extends Component {
         .end((err,response)=>{
             var res = response.body
             this.setState({boards:res})
-            let thisBoard = this.state.boards.find(board => board.boardCode === this.state.board);
+            var thisBoard = this.state.boards.find(board => board.boardCode === this.state.board);
             this.setState({thisBoard: thisBoard})
         })
         
