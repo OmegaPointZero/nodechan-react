@@ -51,7 +51,7 @@ class Board extends Component {
     componentDidMount(){
 
         // Get boards data for menu and for the title
-        request.get('http://127.0.0.1:8080/api/boardList')
+        request.get(process.env.REACT_APP_SERVER+'/api/boardList')
         .end((err,response)=>{
             var res = response.body
             this.setState({boards:res})
@@ -59,7 +59,7 @@ class Board extends Component {
             this.setState({thisBoard: thisBoard})
         })
 
-        var apiURI = 'http://127.0.0.1:8080/api/thread/'+this.state.board+'/'+this.state.thread
+        var apiURI = process.env.REACT_APP_SERVER+'/api/thread/'+this.state.board+'/'+this.state.thread
         request.get(apiURI)
         .end((err,response)=>{
             var res = response.body

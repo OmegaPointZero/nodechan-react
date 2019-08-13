@@ -10,7 +10,7 @@ class CatalogPost extends Component {
 
         var catalogContainerID = "p" + post.OP;
         var thumbnailLink = "/"+post.preview[0].board+"/thread/"+post.OP;
-        var imageURL = 'http://127.0.0.1:8080/images/s'+fn
+        var imageURL = process.env.REACT_APP_SERVER+'/images/s'+fn
 
 
         return(

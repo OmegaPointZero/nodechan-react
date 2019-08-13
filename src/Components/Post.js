@@ -82,8 +82,8 @@ class Post extends Component {
             if(post.fileName){
                 if(post.fileName){
                     var fn = post.fileName.split('.')[0]
-                    var link = "http://127.0.0.1:8080/images/"+post.fileName
-                    var src = "http://127.0.0.1:8080/images/s"+fn+".png"
+                    var link = process.env.REACT_APP_SERVER+"/images/"+post.fileName
+                    var src = process.env.REACT_APP_SERVER+"/images/s"+fn+".png"
                     var size = post.fileSize + " Bytes"
                     return(
                         <div className="file">
@@ -102,7 +102,6 @@ class Post extends Component {
 
         var delID = "delete_"+post.postID
         var posterUIDClass = "posteruid id_"+post.postID;
-        var pID = "#"+post.postID;
         var rpID = "rp-"+post.postID
         var mrpID = "m"+rpID
         var reportLink = "report-link-"+post.postID
@@ -153,7 +152,7 @@ class Post extends Component {
                                 {generateTime(post.time)}
                             </span>
                             <span className="postNumber">
-                                <a href={pID} className="highlightThisPost" id={post.postID}>
+                                <a href="#" className="highlightThisPost" id={post.postID}>
                                     No. 
                                 </a>
                                 <a href="#" className="quotePostNumber" id={post.postID}>

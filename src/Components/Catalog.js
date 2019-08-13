@@ -21,7 +21,7 @@ class Catalog extends Component {
     componentDidMount(){
 
         // Get boards data for menu and for the title
-        request.get('http://127.0.0.1:8080/api/boardList')
+        request.get(process.env.REACT_APP_SERVER+'/api/boardList')
         .end((err,response)=>{
             var res = response.body
             this.setState({boards:res})
@@ -30,7 +30,7 @@ class Catalog extends Component {
         })
         
         // Get board catalog
-        var apiURI = 'http://127.0.0.1:8080/api/catalog/'+this.state.board;
+        var apiURI = process.env.REACT_APP_SERVER+'/api/catalog/'+this.state.board;
         request.get(apiURI)
         .end((err,response)=>{
             var res = response.body

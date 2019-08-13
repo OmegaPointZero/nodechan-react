@@ -8,10 +8,10 @@ class Banner extends Component {
     }
 
     componentDidMount(){
-        var apiURI = "http://localhost:8080/api/banner"
+        var apiURI = process.env.REACT_APP_SERVER+"/api/banner"
         request.get(apiURI)
         .end((err,response)=>{
-            var banner = "http://localhost:8080/"+response.body.banner
+            var banner = process.env.REACT_APP_SERVER+"/"+response.body.banner
             this.setState({banner:banner})
         })
     }

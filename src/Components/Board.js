@@ -45,7 +45,7 @@ class Board extends Component {
     componentDidMount(){
 
         // Get boards data for menu and for the title
-        request.get('http://127.0.0.1:8080/api/boardList')
+        request.get(process.env.REACT_APP_SERVER+'/api/boardList')
         .end((err,response)=>{
             var res = response.body
             this.setState({boards:res})
@@ -58,7 +58,7 @@ class Board extends Component {
             page = 1;
             this.setState({page:''})
         }
-        var apiURI = 'http://127.0.0.1:8080/api/board/'+this.state.board+'/'+page
+        var apiURI = process.env.REACT_APP_SERVER+'/api/board/'+this.state.board+'/'+page
         request.get(apiURI)
         .end((err,response)=>{
             var res = response.body
@@ -98,6 +98,25 @@ class Board extends Component {
             }
         }
 
+        const navPage = function(state){
+            var arr = [] 
+            var page = state.page;
+            if(page===''){
+                page = 1
+            }
+            for(var i = 1; i < 11; i++){
+                var link = "/boards/"+state.board+"/"+i
+                if(i===page){
+                    arr.push(<span>[<a href={link} className="pageLink"><b>{i}</b></a>]</span>)
+                } else {
+                    arr.push(<span>[<a href={link} className="pageLink">{i}</a>]</span>)
+                }
+            } 
+            var nURL = "/boards/"+state.board+"/"+(Number(page)+1)
+            arr.push(<a href={nURL}><button>Next</button></a>)
+            return arr
+        }
+
         if(!this.state.threads){
             return(<div>Loading...</div>)
         } else {
@@ -116,6 +135,20 @@ class Board extends Component {
                     <hr />
                     <div className="threadPreviewContainer">
                         {  this.renderThreads(this.state.threads, this.props)}
+                    </div>
+                    <div className="footMenu">
+                        <div className="pageTab">
+                            {navPage(this.state)}
+                        </div>
+                        <hr />
+                        {threadNav("bottom",this.state)}
+                        <div className="bottomCtrl">
+                            <span className="deleteForm">
+                                <input type="hidden" name="mode" value="userDelete" />
+                                    Delete Post: [<input type="checkbox" name="deleteImageOnly" className="deleteImageOnly" value="true" /> File Only ]
+                                <input type="submit" id="delete" value="Delete" />
+                            </span>
+                        </div>
                     </div>
                     <hr />
                     <BoardMenu boards={this.state.boards} />

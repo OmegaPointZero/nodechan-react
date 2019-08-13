@@ -42,7 +42,9 @@ class BulletinBoard extends Component {
     }
 
     componentDidMount(){
-        request.get('http://127.0.0.1:8080/api/boardlist')
+        var url = process.env.REACT_APP_SERVER+'/api/boardlist';
+        console.log(url)
+        request.get(url)
         .end((err,response)=>{
             var res = response.body;
             console.log(res)

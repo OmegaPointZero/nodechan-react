@@ -13,10 +13,10 @@ class PostForm extends Component {
         event.preventDefault();
         var url;
         if(this.props.type ==="newPost"){
-            url = "http://127.0.0.1:8080/api/thread/"+this.state.board+"/"+this.state.thread;
+            url = process.env.REACT_APP_SERVER+"/api/thread/"+this.state.board+"/"+this.state.thread;
             console.log(`target url: ${url}`)
         } else /* newThread */ {
-            url = "http://127.0.0.1:8080/api/boards/"+this.state.board
+            url = process.env.REACT_APP_SERVER+"/api/boards/"+this.state.board
         }
         const data = new FormData(event.target);
         request.post(url)
