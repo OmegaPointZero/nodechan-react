@@ -9,6 +9,8 @@ class Post extends Component {
         var name;
         if(post.name ===''){
             name = 'Anonymous';
+        } else {
+            name = post.name;
         }
 
         const generateTime = function(pt){
@@ -106,8 +108,16 @@ class Post extends Component {
         var reportLink = "report-link-"+post.postID
         var reportURL = "/report/"+post.board+"/"+post.postID
         var postBody = postMessage(post.body)
-        if(postBody === undefined){
+        if (postBody === undefined){
             postBody = ""
+        }
+
+        var banhammer = function(){
+            if(post.publicBan === true){
+                return(<span className="userBanned">(USER WAS BANNED FOR THIS POST)</span> )
+            } else {
+                return null;
+            }
         }
 
         var reply = function(bv, meta){
@@ -126,11 +136,11 @@ class Post extends Component {
                     <div className="postInfo">
                         <input type="checkbox" name="" id={delID} className="postDeleteBox" value="delete" />
                         <span className="subject">
-                            {post.subject}
+                            {post.subject}&nbsp;
                         </span>
                         <span className="nameBlock">
                             <span className="name">
-                                {name}
+                                {name}&nbsp;
                             </span>
                             <span className={posterUIDClass}>
                                 (ID: <span className="hand" title="Highlight posts by this ID" style={{backgroundColor: post.userIDColor}}>
@@ -166,6 +176,7 @@ class Post extends Component {
                     {imageSection()}
                     <div className="postMessage">
                         {postBody}
+                        {banhammer()}
                     </div>
                 </div>  
             </div>

@@ -389,3 +389,7 @@ img.banner{
     padding-right: 7px;
 }
 
+.userBanned{
+    color: red;
+    font-weight: bold;
+}

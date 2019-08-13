@@ -19,8 +19,6 @@ class Board extends Component {
     }
 
     renderThreads = (threads, props) => {
-        console.log('Here\'s the threads:')
-        console.log(threads)
         var p = []
         threads.forEach(function(t){
             var meta = {
@@ -57,7 +55,8 @@ class Board extends Component {
 
         var page = this.state.page;
         if(page===undefined){
-            page = 1
+            page = 1;
+            this.setState({page:''})
         }
         var apiURI = 'http://127.0.0.1:8080/api/board/'+this.state.board+'/'+page
         request.get(apiURI)
@@ -111,7 +110,7 @@ class Board extends Component {
                     </div>
                     <h1 className="boardTitle"> /{this.state.thisBoard.boardCode}/ - {this.state.thisBoard.boardTitle} </h1>
                     <hr className="abovePostForm" />
-                    <PostForm type="newPost" />
+                    <PostForm type="newThread" board={this.state.board} thread={null}/>
                     <hr />
                     {threadNav("top",this.state)}
                     <hr />

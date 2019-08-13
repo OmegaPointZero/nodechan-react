@@ -121,7 +121,7 @@ class Board extends Component {
                     </div>
                     <h1 className="boardTitle"> /{this.state.thisBoard.boardCode}/ - {this.state.thisBoard.boardTitle} </h1>
                     <hr className="abovePostForm" />
-                    <PostForm type="newPost" />
+                    <PostForm type="newPost" board={this.state.board} thread={this.state.thread}/>
                     <hr />
                     {threadNav("top",this.state)}
                     <hr />
