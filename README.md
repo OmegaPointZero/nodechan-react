@@ -8,7 +8,7 @@ Nodechan-react requires an API running on the backend. It was built using the st
 
 + Clean up how divs are floated at bottom of pages, make sure everything is populated
 + Need to add javascript in page functionality to:
-    + Update thread appropriately after POSTing post to server
+    + Update thread appropriately after POSTing post to server (EventBus? refresh/redirect page?)
     + Delete Post (fix functionality on original nodechan site, this is currently one of the longest running issues that needs to be fixed)
     + Need to fix href warnings/placeholder link warnings, rewrite javascript to work on <p> tags and not </a> tags to get rid of placeholder links
         + `No. ` in highlightThisPost needs to highlight this post

@@ -149,7 +149,7 @@ class Post extends Component {
                                      </span>)
                             </span>
                             <span className="postTime">
-                                {generateTime(post.time)}
+                                {generateTime(post.time)}&nbsp;
                             </span>
                             <span className="postNumber">
                                 <a href="#" className="highlightThisPost" id={post.postID}>

@@ -22,7 +22,9 @@ class PostForm extends Component {
         request.post(url)
         .send(data)
         .end((err,response)=>{
-            console.log(response)
+            if(this.props.type==="newPost"){
+                window.location.reload();
+            }
         })
         
         
