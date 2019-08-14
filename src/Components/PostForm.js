@@ -24,6 +24,9 @@ class PostForm extends Component {
         .end((err,response)=>{
             if(this.props.type==="newPost"){
                 window.location.reload();
+            } else {
+                var target = "/"+response.body[0].board+"/thread/"+response.body[0].postID;
+                window.location = target;
             }
         })
         
