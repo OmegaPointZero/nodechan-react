@@ -143,26 +143,26 @@ class Post extends Component {
                             </span>
                             <span className={posterUIDClass}>
                                 (ID: <span className="hand" title="Highlight posts by this ID" style={{backgroundColor: post.userIDColor}}>
-                                    <a className="userID"> 
+                                    <span className="userID"> 
                                         {post.userID} 
-                                    </a>
+                                    </span>
                                      </span>)
                             </span>
                             <span className="postTime">
                                 {generateTime(post.time)}&nbsp;
                             </span>
                             <span className="postNumber">
-                                <a href="#" className="highlightThisPost" id={post.postID}>
+                                <span className="highlightThisPost" id={post.postID}>
                                     No. 
-                                </a>
-                                <a href="#" className="quotePostNumber" id={post.postID}>
+                                </span>
+                                <span className="quotePostNumber" id={post.postID}>
                                     {post.postID}&nbsp;
-                                </a>
+                                </span>
                                 <span>
                                     {reply(this.props.boardViewOP, this.props.meta)}
-                                    <a href="#" className="report" id={rpID}>
+                                    <span className="report" id={rpID}>
                                                          ▶ 
-                                    </a>
+                                    </span>
                                     <div className="reply report-button hidden" id={mrpID} syle={{width: '5%', height: '2%', fontSize: '8px', position:'relative'}}>
                                         <a className="report-link" id={reportLink} target="_blank"  rel="noopener noreferrer" href={reportURL}>
                                             Report

@@ -21,14 +21,6 @@ class Board extends Component {
         }
     }
 
-    renderPosts = (posts) => {
-        var p = []
-        posts.forEach(function(post){
-            p.push(<Post post={post} boardViewOP={false} meta={null}/>)
-        })
-        return p
-    }
-
     countImages = (posts) => {
         var images = 0;
         for(var i=0;i<posts.length;i++){
@@ -112,6 +104,15 @@ class Board extends Component {
                 }
             }
 
+            const renderPosts = function(posts){
+                var p = []
+                for(var i=0;i<posts.length;i++){
+                    var post = posts[i];
+                    p.push(<Post post={post} key={i} boardViewOP={false} meta={null}/>)
+                }
+                return p
+            }
+
             return(
                 <div>
                     <BoardMenu boards={this.state.boards} />
@@ -125,7 +126,7 @@ class Board extends Component {
                     <hr />
                     {threadNav("top",this.state)}
                     <hr />
-                    {this.renderPosts(this.state.posts)}        
+                    {renderPosts(this.state.posts)}        
                     <hr />
                     {threadNav("bottom",this.state)}
                     <hr />
