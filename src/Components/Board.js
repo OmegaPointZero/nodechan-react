@@ -32,9 +32,9 @@ class Board extends Component {
             }
             var threadArr = []
             var preview = t.preview;
-            preview.forEach(function(post){
+            preview.forEach(function(post, i){
                 var bvop = (post.OP === post.postID)
-                threadArr.push(<Post post={post} boardViewOP={bvop} meta={meta}/>)
+                threadArr.push(<Post post={post} key={i} boardViewOP={bvop} meta={meta}/>)
             })
             threadArr.push(<hr />)
             p.push(threadArr)
@@ -107,13 +107,13 @@ class Board extends Component {
             for(var i = 1; i < 11; i++){
                 var link = "/boards/"+state.board+"/"+i
                 if(i===page){
-                    arr.push(<span>[<a href={link} className="pageLink"><b>{i}</b></a>]</span>)
+                    arr.push(<span key={i}>[<a href={link} className="pageLink"><b>{i}</b></a>]</span>)
                 } else {
-                    arr.push(<span>[<a href={link} className="pageLink">{i}</a>]</span>)
+                    arr.push(<span key={i}>[<a href={link} className="pageLink">{i}</a>]</span>)
                 }
             } 
             var nURL = "/boards/"+state.board+"/"+(Number(page)+1)
-            arr.push(<a href={nURL}><button>Next</button></a>)
+            arr.push(<a key={arr.length+1} href={nURL}><button>Next</button></a>)
             return arr
         }
 

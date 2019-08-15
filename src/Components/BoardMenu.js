@@ -14,7 +14,7 @@ class BoardCode extends Component {
 const makeBoardsMenu = function(array){
     var thisArr = []
     for(var i=0;i<array.length;i++){
-        thisArr.push(<BoardCode board={array[i]} />);
+        thisArr.push(<BoardCode key={i} board={array[i]} />);
     }
     return thisArr
 }
